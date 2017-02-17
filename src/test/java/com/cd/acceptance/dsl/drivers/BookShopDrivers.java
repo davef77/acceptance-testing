@@ -16,13 +16,14 @@ public class BookShopDrivers implements BookShopDriver
         drivers.put("Amazon", new AmazonBookShopDriver());
         drivers.put("BookDepository", new BookDepositoryBookShopDriver());
         drivers.put("MyLocalBookStore", new MyLocalBookStoreBookShopDriver());
+        drivers.put("default", new MyLocalBookStoreBookShopDriver());
     }
 
     private BookShopDriver driver()
     {
         List<String> channels = ChannelFinder.listChannels();
 
-        return drivers.get(channels.get(0));    // Hack to run only first channel for now
+        return drivers.get(channels.get(0));
     }
 
     @Override

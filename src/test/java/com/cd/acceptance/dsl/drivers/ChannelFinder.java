@@ -19,11 +19,20 @@ public class ChannelFinder
     {
         ArrayList<String> channels = new ArrayList<String>();
 
-        Channel c = findTestMethod().getAnnotation(Channel.class);
+        Method testMethod = findTestMethod();
 
-        for (Channels channel : c.value())
+        if (testMethod != null)
         {
-            channels.add(channel.name());
+            Channel c = testMethod.getAnnotation(Channel.class);
+
+            for (Channels channel : c.value())
+            {
+                channels.add(channel.name());
+            }
+        }
+        else
+        {
+            channels.add("default");
         }
 
         return channels;
